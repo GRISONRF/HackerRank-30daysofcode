@@ -27,7 +27,7 @@
         #empty-string += value of dict.
 
 #return varempty
-def caesarCipher(s, k):
+# def caesarCipher(s, k):
 
 #     alph_low = 'abcdefghijklmnopqrstuvwxyz'
 #     alhp_up = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -49,5 +49,43 @@ def caesarCipher(s, k):
 # can use a chained operattion: c = chr(ord(c)) -> c = 99
 
 
+#_______________________________________________________________________________
+# input: middle-Outz 2
+# output: okffng-Qwvb
 
+# 
+
+
+
+def caesarCipher(s, k):
+
+    alph = 'abcdefghijklmnopqrstuvwxyz'
+    alph_upper = alph.upper()
+    full_alph = alph + alph_upper
+    
+    #rotate the alphabet:
+    alph_shifted = alph[k:] + alph[:k] + alph_upper[k:] + alph_upper[:k]
+
+
+    #create a dictionary to store alph and corresponding shifted letter:
+    dict_letters = dict(zip(full_alph, alph_shifted))
+
+    #check for letter in the phrase and print shifted corresponding letter
+    string_result = ''
+    
+    for item in s:
+        if item in dict_letters:
+            string_result += dict_letters[item]
+        else:       
+            string_result += item
+        
+    print(alph)
+    print(alph_shifted)
+    print(dict_letters)
+    print(string_result)
+            
+
+
+    
+caesarCipher('middle-Outz', 2)
 
