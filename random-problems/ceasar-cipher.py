@@ -11,37 +11,6 @@
 # input: 11 middle-Outz 2
 # output: okffng-Qwvb
 
-# MY FIRST IDEA:
-# var1 - alphabet
-# var2 - alphabet roteded by n
-
-## dict- key: alph, value: alph+3
-
-# for letter in the var1
-    # for letter in var2
-        #dict[lvar1] = lvar2   #a:c
-
-# varempty string to store new phrase
-# for letter in phrase:
-    # if letter in a key in dict:
-        #empty-string += value of dict.
-
-#return varempty
-# def caesarCipher(s, k):
-
-#     alph_low = 'abcdefghijklmnopqrstuvwxyz'
-#     alhp_up = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-#     rotated_alph = ''
-
-#     for i, l in enumerate(alph):
-#         if i + (k - 1):
-#             rotated_alph += alph[i+(k)]
-#         else: rotated_alph += '****'
-#     print(rotated_alph)
-
-# caesarCipher('middle', 3)
-
-
 # the ceaser cipher encryption rule can be expressed madwthematically as: c = (x + n) % 26. c = encoded character, x = actual character, n = number of positions to shit, mod of 26 bc there are 26 letters in the alphabet
 
 # ord() -> method to convert a character to its numeric representation in Unicode.
@@ -49,11 +18,9 @@
 # can use a chained operattion: c = chr(ord(c)) -> c = 99
 
 
-#_______________________________________________________________________________
+#___________________________________________________________________________________________________
 # input: middle-Outz 2
 # output: okffng-Qwvb
-
-# 
 
 
 
