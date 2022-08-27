@@ -1,5 +1,3 @@
-# HACKERRANK 30 DAYS OF CODE CHALLENGE
+# HACKERRANK PROBLEMS
 
-This repository contains the problems and the answers for each day of the challenge!
-
-<img src="hackerrank.png"/>
+This repository contains the answers for each problem I've been doing on HackerRank.
