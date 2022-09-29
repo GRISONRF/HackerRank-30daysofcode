@@ -13,18 +13,23 @@ def findLongestSingleSlot(leaveTimes):
 
     employees = {0:'a', 1:'b', 2:'c', 3:'d', 4:'e', 5:'f', 6:'g', 7:'h', 8:'i', 9:'j', 10:'k', 11:'l', 12:'m', 13:'n', 14:'o', 15:'p', 16:'q', 17:'r', 18:'s', 19:'t', 20:'u', 21:'v', 22:'w', 23:'x', 24:'y', 25:'z'}
 
-    # need to find the greatest difference between the [1] number from one [x,x] to the next one. and return the id of it.
-    difference = 0
-    for i in range(len(leaveTimes)-1):  #-1 because we iterate through the indexes, that way we can use [i+1]
-        #for the difference between 0 and the first time:
+    # need to find the greatest interval between one [x,x][1] and [y,y][1]
+    intervals = 0
+    nurse = int()
+   
+    for i in range(len(leaveTimes)-1):
+         #for the first interval, where we are comparing with 0
         if i == 0:
-            difference = leaveTimes[0][1]
-        #for the other numbers:
-        if leaveTimes[i+1][1] - leaveTimes[i][1] > difference:
-            difference = leaveTimes[i+1][1] - leaveTimes[i][1]
-            
-    print(employees[leaveTimes[i+1][0]])
+            intervals = leaveTimes[i][1]
+           
+        elif leaveTimes[i+1][1] - leaveTimes[i][1] > intervals:
+            intervals = leaveTimes[i+1][1] - leaveTimes[i][1]
+            nurse = leaveTimes[i][0]
+   
 
+    print(employees[nurse])
+
+     
 
 
 findLongestSingleSlot([[0, 3], [2, 5], [0, 9], [1, 15]])
