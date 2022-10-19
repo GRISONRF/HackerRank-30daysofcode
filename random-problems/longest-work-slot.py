@@ -20,16 +20,13 @@ def findLongestSingleSlot(leaveTimes):
     for i in range(len(leaveTimes)-1):
          #for the first interval, where we are comparing with 0
         if i == 0:
-            intervals = leaveTimes[i][1]
+            intervals = leaveTimes[0][1] - leaveTimes[0][0]
            
-        elif leaveTimes[i+1][1] - leaveTimes[i][1] > intervals:
-            intervals = leaveTimes[i+1][1] - leaveTimes[i][1]
-            nurse = leaveTimes[i][0]
-   
-
-    print(employees[nurse])
-
-     
+        else:
+            if leaveTimes[i+1][1] - leaveTimes[i][1] > intervals:
+                intervals = leaveTimes[i+1][1] - leaveTimes[i][1]
+                nurse = leaveTimes[i+1][0]
+    return employees[nurse]
 
 
-findLongestSingleSlot([[0, 3], [2, 5], [0, 9], [1, 15]])
+print(findLongestSingleSlot([[0, 3], [2, 5], [0, 9], [1, 15]]))
