@@ -1,0 +1,61 @@
+Binary Tree Breadth-First Traversal
+-----------------------------------
+
+Given a Binary Tree, print out the nodes in breadth-first order. Breadth-first order implies that you visit
+ the nodes from left to right, level by level. For example, given the following binary tree:
+
+            5
+     2             8
+  6     5       7     1
+3   4 8  4    3   9  7  2
+             2 1         4
+
+A breadth-first traversal would print out the nodes:
+[5, 2, 8, 6, 5, 7, 1, 3, 4, 8, 4, 3, 9, 7, 2, 2, 1, 4]
+
+This is different from a In-order, Pre-Order, or Post-Order traversal of a binary tree.
+In-Order: [3, 6, 4, 2, 8, 5, 4, 5, 2, 3, 1, 7, 9, 8, 7, 1, 2, 4]
+Pre-Order: [5, 2, 6, 3, 4, 5, 8, 4, 8, 7, 3, 2, 1, 9, 1, 7, 2, 4]
+Post-Order: [3, 4, 6, 8, 4, 5, 2, 2, 1, 3, 9, 7, 7, 4, 2, 1, 8, 5]
+
+If you have time, implement these as well.
+
+You may use the following to represent a Binary Tree Node:
+class BinaryTreeNode {
+    int value;
+    BinaryTreeNode left;
+    BinaryTreeNode right;
+
+    BinaryTreeNode(int value, BinaryTreeNode left, BinaryTreeNode right) {
+        this.value = value;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+
+def traverse(root):
+    
+    #queue
+    #result -> visited nodes
+    #node
+
+    visited = []
+  
+    
+    visited.append(root)
+    
+
+    while visited:
+        curr_node = queue.pop(0)
+        if curr_node.left and curr_node.left not in visited:
+            visited.append(curr_node.left)
+            queue.append(curr_node.left)
+
+        if curr_node.right and curr_node.right not in visited:
+            visited.append(curr_node.right)
+            queue.append(curr_node.right)
+
+    
+    print(visited)
+
