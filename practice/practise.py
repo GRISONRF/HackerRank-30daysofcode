@@ -6,53 +6,53 @@ most_requested_resource(logs1) # => ('resource_3', 3)most_requested_resource(log
 
 
 def most_requested_resource(logs):
-    # Create a dictionary to store access counts for each resource
-    count = {} #resource:[times]
     
-    # Iterate through logs and map the times for resources
-    for time, user, resource in logs:
-        if resource not in count:
-            count[resource] = []
-        count[resource].append(int(time))
-    # print(count)
+  #highest number of access in 5 min
+  #300 seconds
+  
+  #resource: [times]
+  res_map = {}
+  for time, user, res in logs:
+    if res not in res_map:
+      res_map[res] = list()
+    res_map[res].append(int(time))
+
+  max_res = None
+  max_count = 0
+
+  for res, time in res_map.items():
+    time = sorted(time)
     
-    # Find the resource with the highest access count in any 5-minute window // 300secods
-    max_resource = None  #resource that has the highests count in a 5min window
-    max_count = 0  #access count for that resource
+    start = 0
+    end = 0 #1
+    while start < len(time):
+      
+      while end < len(time) and time[end] - time[start] <= 300:
+        end +=1
+      
+      if end != start:
+
+        curr_count = end - start
+
+        if curr_count > max_count:
+          max_count = curr_count
+          max_res = res
+      
+      start +=1
+      end = start
+
+  print(max_res, max_count)
+
+#T: O(n^2) -> sorted is only sorting though times which is smaller than the logs
+#M: O(n)
+    
+
+    
 
 
-    #iterate over the map
-    for resource, time in count.items():
-        #sort the time
-        time = sorted(time)
-        #initialize the start and end of window
-        #both start at 0: first loop (where we use the start) represents the index of earliest time and increment it by 1 in each iteration. inner loop increments the 'end' until the difference between the 'start' time and 'end' time is greater than 5 min.
 
-        start = 0
-        end = 0
 
-        #outer loop (while start is on bounds of the time)
-        while start < len(time):
-            #while end is on bounds and end - start not more than 5min
-            while end < len(time) and time[end] - time[start] <= 300:
-                #if didn't hit the 5min yet, move end to the next time by incrementing its index by 1
-                end+=1
-            # when the while loop is broken (we hit the 5min) check if the number of timestamps (end - start = the amount of timestamps inside that 5 minutes) is greater than max_count
-            if end - start > max_count:
-                #if it is, substitute max resourse to curr one and the max_count
-                max_count = end - start
-                max_resource = resource
-            #also when while loop is broken, update the start in the outer loop    
-            start+=1
-            end = start
-            
 
-    #at the end, return both maxs
-    return max_count, max_resource
-   
-       
-# T: O(mn log m), where m is the number of resources and n is the total number of timestamps.
-# M: O(n)
 
 
 logs1 = [    
@@ -116,7 +116,7 @@ logs4 = [
 ]
 
 print(most_requested_resource(logs4))
-# Output: ('resource_3', 3) or resource_2 3
+# Output: ('resource_3', 3)
 
 # Test Case 3
 logs5 = [    ["58523", "user_1", "resource_1"], 
@@ -130,4 +130,4 @@ logs5 = [    ["58523", "user_1", "resource_1"],
     ["58531", "user_3", "resource_3"]
 ]
 
-print(most_requested_resource(logs5))   #resource_3 4
+print(most_requested_resource(logs5)) 

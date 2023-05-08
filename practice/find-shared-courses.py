@@ -29,8 +29,9 @@
 #   [17, 25]: []
 # }
 
-# T: O(n^2 * m)
+# T: O(n^2 * m)  -> n^2 nested loops, * m for the intersection
 # M: O(n*m)
+
 def find_pairs(student_course_pairs):
 
   #create a dict with student id as key and courses as value

@@ -48,12 +48,43 @@ Bought Clicked Ad Text
 
 def adsConversionRate(completedPurchaseUserIds, adClicks, allUserIps):
 
+    #make completedPurchaseUserIds into a set for fast lookup
+    bought_ids = set(completedPurchaseUserIds) # (id)
+    #dict conversion to store conversion rates for each id  
+    conversion = {}  #{text : [how many bought][clicks] }
+    #dict id_to_ip to map user id to ip
+    id_to_ip = {}  #{id : ip}
+
+    #iterate over alluserips, split into id and ip and add them into the dict
+    for users in allUserIps:
+        id, user_ip = users.split(',')
+        id_to_ip[user_ip] = id
+    # print(id_to_ip)
+
+    #iterate over adClicks, split each entry to get the ip address and ad text
+    for click in adClicks:
+        #check if text is already in 'conversion' dict
+        ip, time, text = click.split(',')
+        # print(id_to_ip.get(ip))
+        if text in conversion: #check if this user make a purchase      
+             #add 1 to the clicks 
+            conversion[text][1] += 1
+            # if this ip is in bought ids,   ->  #use get becaus enot all ips are in the id_ip
+            if id_to_ip.get(ip) in bought_ids:
+              #add 1 to the bought list inside of conversion -[0]list
+                conversion[text][0] +=1
+                
+        else: #if text it not in conversion
+            #check if user is in bought_ids
+            if id_to_ip.get(ip) in bought_ids:
+                conversion[text] = [1,1]
+            else:        
+                conversion[text] = [0,1]
 
 
-
-
-
-
+    print(conversion)
+    for ad_text, ratio in conversion.items():
+        print(f'{ratio[0]} of {ratio[1]} {ad_text}')
 
 
 

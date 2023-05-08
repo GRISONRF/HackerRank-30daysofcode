@@ -159,24 +159,22 @@ Output: {
 } """
 
 
-def oneHour(input):
+# def oneHour(input):
 
-    withinOneH = {}
-    personMap = {}
-    for name, time in input:
-        personMap[name] = personMap.get(name, []) + [int(time)]
+#     withinOneH = {}
+#     personMap = {}
+#     for name, time in input:
+#         personMap[name] = personMap.get(name, []) + [int(time)]
 
-    print(personMap)
+#     print(personMap)
 
-    for p, time in personMap.items():
-        for i in range(len(time) -1):
-            if time[i+1] - time[i] <= 100:
-                if p not in withinOneH:
-                    withinOneH[p] = []
-                withinOneH[p] += [str(time[i])]
-    print(withinOneH)
-
-
+#     for p, time in personMap.items():
+#         for i in range(len(time) -1):
+#             if time[i+1] - time[i] <= 100:
+#                 if p not in withinOneH:
+#                     withinOneH[p] = []
+#                 withinOneH[p] += [str(time[i])]
+#     print(withinOneH)
 
 
 
@@ -184,7 +182,10 @@ def oneHour(input):
 
 
 
-input = [['James', '1300'], ['Martha', '1600'], ['Martha', '1620'], ['Martha', '1530']]
+
+
+# input = [['James', '1300'], ['Martha', '1600'], ['Martha', '1620'], ['Martha', '1530']]
+input = [['James', '1300'], ['Martha', '1700'], ['Martha', '1620'], ['Martha', '1530'], ['Martha', '2530'], ['Martha', '1610'], ['James', '1530']] 
 
 print(oneHour(input))
 # Output: { 'Martha': ['1600', '1620', '1530'] }

@@ -41,8 +41,9 @@ def frequentAccess(records):
         start = 0
         end = 0
 
-        while end < len(times) and s_times[end] - s_times[start] <= 100:
+        while end < len(times) and s_times[end] - s_times[start] < 100:
             end += 1
+            
         if end - start > 1:
             intervals.append(s_times[start:end])
         start += 1
@@ -52,6 +53,8 @@ def frequentAccess(records):
 
     return ans
 
+#T: N, N, N // nlogn
+#M: O(N)
 
 
 

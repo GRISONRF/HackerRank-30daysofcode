@@ -67,7 +67,8 @@ def flippy(board):
             
     return result if result != [0,0] else None
             
-
+# T: O(N)
+#M: O(1)
 
 
 board = ['z', 'O', 'X'] #0,1

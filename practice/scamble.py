@@ -55,9 +55,6 @@ def scramble(words, stg):
     # If no word was found, return "-"
     return "-"
            
-    
-    
-
 
 words = ["baby", "referee", "cat", "dada", "dog", "bird", "ax"]
 string1 = "ctay"

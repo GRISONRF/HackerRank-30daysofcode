@@ -74,7 +74,7 @@ def find_coordinates(grid, word):
             #do a DFS in the neighbors
             for nx, ny in neighbors:   #check y+1 first, then x+1
                 if dfs(nx, ny, idx+1):   #if the DFS returns TRUE (means the WORD has been found)
-                    coordinates.append(Coordinate(x, y))  #create a Coordinate object using the x and y values and appending to coodinates list. 
+                    coordinates.append((x, y))  #create a Coordinate object using the x and y values and appending to coodinates list. 
                     return True   #return true indicating the word has been found
             visited[x][y] = False
         return False
@@ -96,12 +96,10 @@ grid = [['c', 'c', 'x', 't', 'i', 'b'],
         ['k', 'a', 'i', 'c', 'k', 'i']]
         
 word = "catnip"
-coordinates = find_coordinates(grid, word)
-if coordinates:
-    print(f"The coordinates of '{word}' in the grid are:")
-    for c in coordinates:
-        print(f"({c.x}, {c.y})")
-else:
-    print(f"'{word}' not found in the grid")
+print(find_coordinates(grid, word))
+
+## T:  loop to create grid / recursion / loop to correct order = O(mn*3^l) where m and n are the dimensions of the grid, and l is the length of the word being searched for. 
+## M: O(mn)
+
 # The coordinates of 'catnip' in the grid are:
 # [(1,1)(1,2)(1,3)(2,3)(3,3)(3,4)]

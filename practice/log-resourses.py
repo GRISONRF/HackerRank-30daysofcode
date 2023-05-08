@@ -53,6 +53,9 @@ def user_access(logs):
             
 
 
+    #T: L = len of logs. first loop ,second loop, sorted -> nlogn
+
+    #M: size of dict proportional to size of users. O(n)
         
 
 

@@ -45,7 +45,7 @@ stories(endings1, choices1_4, 1) => -1
 stories(endings1, choices1_4, 2) => 15
 stories(endings2, choices2_1, 1) => 11
 stories(endings2, choices2_1, 2) => -1
-stories(endings2, choices2_2, 1) => 11
+stories(endings2, choices2_2, 1) => 11 
 stories(endings2, choices2_2, 2) => 11
 '''
 
@@ -86,41 +86,40 @@ choices2_2 = []
 # endings1 = [6, 15, 21, 30]
 
 def find_ending(endings, choices, option):
-    # create a dictionary to store the mapping from current page to the next page
-    cmap = {}
-    # loop through the `choices` list
+    #create a map to store the choice and the next option of page
+    choice_map = {}
     for c in choices:
-        # store the current page as key, and next page as value in the `cmap` dictionary
-        # the value is either `c[1]` (index 1) if `option` is 1, or `c[2]` (index 2) if `option` is 2
-        cmap[c[0]] = c[1] if option == 1 else c[2]
-    # create a set to store the pages that have been visited
-    seen = set()
-    # initialize the starting page number as `i`
-    i = 1
-    # continue the loop until the maximum ending page is reached
-    while i <= endings[-1]:
-        # check if the current page `i` is one of the endings
-        if i in endings:
-            # return `i` if it is one of the endings
-            return i
-        # add the current page `i` to the `seen` set
-        seen.add(i)
-        # check if the `cmap` dictionary contains the current page `i`
-        if i in cmap:
-            # update the next page `i` with the value from `cmap`
-            i = cmap[i]
-            # check if the next page `i` has already been visited
-            if i in seen:
-                # return -1 if there is a loop
-                return -1
+        if option == 1:
+            choice_map[c[0]] = c[1]
         else:
-            # increment `i` if the current page `i` is not in `cmap`
-            i += 1
-    # return -1 if no ending is found
-    return -1
+            choice_map[c[0]] = c[2]
+
+    # print(choice_map)
+
+    read_pages = []
+    i = 1
+    #iterate over pages. from 1 to the last ending
+    #while i not one of endings:
+    while i not in endings:
+        #when we hit a number in the map, go to the value of that
+
+        if i in read_pages:
+            return -1
+        
+        #add page to pages read
+        read_pages.append(i)
+
+
+        if i in choice_map:
+            i = choice_map[i]
+        
+        else:
+            i+=1
+
+    return i
         
     
-print(find_ending(endings1, choices1_1, 1))
+print(find_ending(endings1, choices1_1, 1)) #6
 print(find_ending(endings1, choices1_1, 2))# -1
 print(find_ending(endings1, choices1_2, 1))# 15
 print(find_ending(endings1, choices1_2, 2))# -1

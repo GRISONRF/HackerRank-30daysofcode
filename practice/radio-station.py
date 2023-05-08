@@ -31,42 +31,40 @@ Do vou Feel Like We DO
 Do You Believe in Magic
 "вуе вуе Baby """
 
-#Time: O(n^2 * 2^n)
-#Memory: O(n^2 * 2^n)
+def find_longest_chain(songs, song1_1):
 
-def find_longest_chain(songs, song_1):
-
-    #list to store chains
-    chains = []
-
-    #create func to build the chain using the chain and the used _songs
-    def build_chain(chain, used_songs):
-
-        #get the last word in chain 
-        last_word = chain[-1].split()[-1]
-        #iterate over the songs
-        for song in songs:
-            #if the song wasn't used before and the last word from chain == to the first word from curr song
-            if song not in used_songs and last_word == song.split()[0]:
-
-                #we will build a chain using the curr chain adding the curr song AND add the song to the set used_songs.
-                build_chain(chain + [song], used_songs.union({song}))
-        # when the for loop is done, means what we have in the chain is the longest chain we could have made, so add it in the chains
-        chains.append(chain)
-
-    #iterate over songs 
+    #map to store songs
+    mapping = {}
+    #iterate over songs
     for song in songs:
-        
-        #if the curr song is equal to the start_song, we build the chain using the song as the first chain and add song in the set of used_songs
-        if song == song_1:
-            build_chain([song], {song})
-    
-    #find max len by checking the len of all chains in chains
-    max_length = max(len(chain) for chain in chains)  #max_len == number
-    #getting the list that has the len == to the max_len
-    longest_chains = [chain for chain in chains if len(chain) == max_length]
-    
-    return longest_chains #return that chain
+        #split them
+        mapping[song] = song.split()
+
+    #helper funtion to get the longest chain // takes the current song and the curr chain
+    def get_longest_chain(current_song, current_chain):
+        #update the longest chain to be the current
+        longest_chain = current_chain
+        #get current last word which will be the last word from the last song of the current chain
+        current_last_word = current_song.split()[-1]
+
+        #iterate over the mapping
+        for song, words in mapping.items():
+            #check if the song isnt already in the current chain and if the first word of the song's word is same as curr last word
+            if song not in current_chain and words[0] == current_last_word:
+                #if it is, thats the next song in the chain, so we get the longest chain using the song and the current chain + [song]
+                next_chain = get_longest_chain(song, current_chain + [song])
+                #at the end of the chain, check which chain is the longest and update
+                if len(next_chain) > len(longest_chain):
+                    longest_chain = next_chain
+        #return the longest
+        return longest_chain
+
+    #call the longest chain with the first song
+    return get_longest_chain(song1_1, [song1_1])
+
+#T: O(n^2 * m)  recursion, loop, N = num of songs. M= len of each title // N^2 for every song we iterate over all of the songs. * M = go over each song and split the words, so it depends on the len of the song. ANSWER = O(n^2 * m)
+#M: N*M -> map size of the num of songs. since it stores the words, it can have at most M length
+
 
 
 
@@ -98,21 +96,3 @@ print(find_longest_chain(songs, song1_3))
 print(find_longest_chain(songs, song1_4))
 
 
-
-
-
-
-""" 
-wronf function signature
-def longest_chain(songs):
-
-    chains = {}
-    for i in range(len(songs)):
-        chain = [songs[i]]
-        used_songs = {i}
-        for j in range(len(songs)):
-            if j not in used_songs and chain[-1].split()[-1] == songs[j].split()[0]:
-                chain.append(songs[j])
-                used_songs.add(j)
-        chains[len(chain)] = chain
-    print(chains[max(chains)]) """
